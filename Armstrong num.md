@@ -1,4 +1,5 @@
 // write a program to check whether an integer is Armstrong or not
+
 #include <stdio.h>
 #include <math.h>
 
