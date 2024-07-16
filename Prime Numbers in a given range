@@ -1,0 +1,47 @@
+WAP to display all the prime numbers using a recursive approach within a given range, also ask for continuation. 
+Source code: 
+#include <iostream>
+using namespace std;
+
+//Function to check is it is prime number or not
+ bool checkprime(int num,int i=2){
+    if (num<=2){
+        return (num==2)?true:false;
+    }
+    if (num%i==0){
+        return false;
+    }
+    if (i*i>num){
+        return true;
+    }
+    return checkprime(num,i+1);
+}
+
+//Function to print all the prime numbers in range 
+void printprime(int start, int end){
+    if(start>end){
+        return;
+    }
+    if (checkprime(start)){
+        cout<< start<<" ";
+    }
+    printprime(start+1,end);
+}
+
+//Driver’s Function
+int main() {
+    int start,end,result; 
+    char choice;
+    cout<<"Enter starting and ending range: "<<endl;
+    cin>>start>>end;
+    
+    printprime(start,end);
+    
+    cout<<endl<<"Do you want to continue(Y/N): "<<endl;
+    cin>>choice;
+    
+    if(choice=='Y'){
+        main();
+    }
+    return 0;
+}
