@@ -3,7 +3,7 @@
 int main()
 {
     int n, m, p, sum = 0;
-    printf("Enter any integer:");
+    printf("Enter any number:");
     scanf("%d", &n);
     p = n;
     for (int i = 0; i <= n; i++)
