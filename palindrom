@@ -1,4 +1,4 @@
-// C program for palindrom using iteratiion
+// C program for checking if the number is in palindrom or not using iteratiion
 #include <stdio.h>
 int main()
 {
