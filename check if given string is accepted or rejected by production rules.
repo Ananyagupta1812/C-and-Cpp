@@ -1,0 +1,33 @@
+//Write a program in C to check if given string is accepted or rejected by production rules. S → aS | Sb | ab.
+
+#include <stdio.h> 
+#include <string.h> 
+#include <stdbool.h>
+
+bool isValidProduction(char *str, int start, int end) { 
+    if (start >= end - 1) {
+        return (str[start] == 'a' && str[end] == 'b');
+    }
+    if (str[start] == 'a' && isValidProduction(str, start + 1, end)) {
+         return true;	
+    }
+    if (str[end] == 'b' && isValidProduction(str, start, end - 1)) { 
+        return true;
+    }
+    return false;
+}
+
+int main() {
+    char str[100];
+    printf("Enter the string to check: ");
+    scanf("%s", str);
+    int length = strlen(str);
+    if (isValidProduction(str, 0, length - 1)){
+        printf("Accepted\n");
+    } 
+    else { 
+        printf("Rejected\n");	
+    } 
+    return 0; 
+}
+
