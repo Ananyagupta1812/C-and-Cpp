@@ -1,0 +1,54 @@
+//to count number of tokens in the given program. 
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+#define MAX 100
+int isDelimiter(char ch) {
+    return (ch == ' ' || ch == '+' || ch == '-' || ch == '*' || ch == '/' ||
+            ch == ',' || ch == ';' || ch == '>' || ch == '<' || ch == '=' ||
+            ch == '(' || ch == ')' || ch == '[' || ch == ']' || 
+            ch == '{' || ch == '}');
+}
+int countTokens(const char *str) {
+    int count = 0;
+    int i = 0;
+    int length = strlen(str);
+    while (i < length) {
+        while (i < length && str[i] == ' ') {
+            i++;
+        }
+        if (isalpha(str[i])) {
+            while (i < length && (isalnum(str[i]) || str[i] == '_')) {
+                i++;
+            }
+            count++;
+        }
+        else if (isdigit(str[i])) {
+            while (i < length && isdigit(str[i])) {
+                i++;
+            }
+            count++;
+        }
+        else if (isDelimiter(str[i])) {
+            if ((str[i] == '=' || str[i] == '>' || str[i] == '<' || str[i] == '!') && str[i + 1] == '=') {
+                i += 2; 
+            } else {
+                i++;  
+            }
+            count++;
+        }
+        else {
+            i++;
+        }
+    }
+    return count;
+}
+int main() {
+    char input[MAX];
+    printf("Enter a program string: ");
+    fgets(input, MAX, stdin);
+    input[strcspn(input, "\n")] = '\0';
+    printf("Number of tokens: %d\n", countTokens(input));
+    return 0;
+}
