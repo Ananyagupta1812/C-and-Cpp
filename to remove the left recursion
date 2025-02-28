@@ -1,0 +1,38 @@
+//to remove the left recursion from the given grammar.
+#include <stdio.h>
+#include <string.h>
+
+void removeLeftRecursion(char nonTerminal, char alpha[], char beta[]) {
+    printf("Grammar after removing left recursion:\n");
+    printf("%c -> %s%c'\n", nonTerminal, beta, nonTerminal);
+    printf("%c' -> %s%c' | ε\n", nonTerminal, alpha, nonTerminal);
+}
+
+int main() {
+    char nonTerminal, alpha[10], beta[10], grammar[20];
+    printf("Enter the grammar (Format: A->Aα|β): ");
+    scanf("%s", grammar);
+    nonTerminal = grammar[0];  
+    int i = 3, j = 0, k = 0;
+    char firstProd[10], secondProd[10];
+    
+    while (grammar[i] != '|' && grammar[i] != '\0') {
+        firstProd[j++] = grammar[i++];
+    }
+    firstProd[j] = '\0';
+    if (grammar[i] == '|') {
+        i++; 
+    }
+    while (grammar[i] != '\0') {
+        secondProd[k++] = grammar[i++];
+    }
+    secondProd[k] = '\0';
+    if (firstProd[0] == nonTerminal) {
+        removeLeftRecursion(nonTerminal, firstProd + 1, secondProd);
+    } 
+    else {
+        printf("No left recursion detected.\n");
+    }
+    return 0;
+}
+
